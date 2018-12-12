@@ -1,0 +1,26 @@
+
+{{>navbar}}
+<!--Event List Card-->
+<div class="container-fluid">
+    <br>
+    <h2 style="color:whitesmoke; text-align:center; margin-top:50px;">
+        USM Events
+    </h2>
+    <p style="color:whitesmoke; text-align:center; margin-bottom:40px">
+        Click cards below to find more about the event.
+    </p>
+
+    <div class="row" style="text-align:center;" >
+        {{#each titleArray}}
+        <div class="col-sm-6" style="margin-top:10px">
+            <div class="card" >
+                <div class="card-body">
+                    <h5 class="card-title">{{name}}</h5>
+                    <p class="card-text">{{description}}</p>
+                    <a href="#" class="btn btn-primary">Find out more</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

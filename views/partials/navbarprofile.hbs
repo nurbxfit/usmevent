@@ -1,0 +1,36 @@
+
+<!--navbar-->
+<div class="container" style="padding:10px; margin-bottom:50px">
+    <nav role="navigation" class="navbar fixed-top navbar-expand-lg navbar-light bg-light" style="padding:20px">
+        <a class="navbar-brand" id="headerIcon" href="/">USM<span class="text-danger" >.EVENT</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/events">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Hunts Now!</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav ml-outo">
+                <li>
+                    <button class="btn btn-outline-success" onclick="location.href='/users/logout'">
+                        Logout
+                    </button>
+                    <button class="btn btn-outline-danger" onclick="location.href='/users/profile'">
+                        Profile
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

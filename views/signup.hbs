@@ -1,0 +1,60 @@
+{{>navbar}}
+
+<div class="container" style="padding-top:30px; text-align:center;">
+    <div class="jumbotron">
+        <h1 class="lead">Sign Up With Us Now! </h1>
+        <!--validation-->
+        {{#if errors}}
+            {{#each errors}}
+             <div class="alert alert-danger">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                {{msg}}
+                </div>
+            {{/each}}
+        {{/if}}
+        {{#if signstat}}
+            <div class="alert alert-danger">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                {{signstat}}
+            </div>
+        {{/if}}
+    </div>
+</div>
+<div class="container" >
+    <di class="row">
+        <div class="col-md-12 card" style="text-align:left;">
+            <form action="/users/signup" method="POST" style="padding:30px">
+                
+                <div class="form-group">
+                    <label for="username">username:</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                </div>
+
+                <div class="form-group">
+                    <label for="firstname">First Name:</label>
+                    <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name eg: John">
+                </div>
+
+                <div class="form-group">
+                    <label for="lname">Last Name:</label>
+                    <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name eg: Doe">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email address:</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="email eg: john@student.usm.my">
+                </div>
+
+                <div class="form-group">
+                    <label for="pass">Password:</label>
+                    <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="pass2">Comfirm Password:</label>
+                    <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Comfirm Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+        </div>
+    </di>
+</div>

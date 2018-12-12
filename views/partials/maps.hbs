@@ -1,0 +1,31 @@
+<div class="column">
+        <script src="http://js.api.here.com/v3/3.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="http://js.api.here.com/v3/3.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+<!--maps-->
+    <div id='mapContainer' class="z-depth-1-half map-container" style="width:100%;height:500px">
+        <!--
+        <iframe width="100%" height="500px" src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+        style="border:0" allowfullscreen></iframe>
+        -->
+    </div>
+</div>
+
+<script>
+        // Initialize the platform object:
+        var platform = new H.service.Platform({
+            'app_id': '2JXuJFCztuQDBLwLDUXH',
+            'app_code': '5IMTHP24i88T6fZuyBaYrA'
+        });
+
+        // Obtain the default map types from the platform object
+        var maptypes = platform.createDefaultLayers();
+
+        // Instantiate (and display) a map object:
+        var map = new H.Map(
+            document.getElementById('mapContainer'),
+            maptypes.normal.map,
+            {
+                zoom: 10,
+                center: { lng: 13.4, lat: 52.51 }
+        });
+  </script>
