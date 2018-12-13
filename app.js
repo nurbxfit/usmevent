@@ -11,6 +11,10 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');
 
+
+
+
+
 var app = express();
 
 // view engine setup
@@ -48,6 +52,7 @@ app.use(flash());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
 
 
 

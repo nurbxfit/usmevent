@@ -1,8 +1,22 @@
+
+<!-- HEAD consist of searchbar and maps-->
+
+<div class="container-fluid" style="margin-top:20px">
+<!--Searchbar-->
 <div class="column">
-        <script src="http://js.api.here.com/v3/3.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
-        <script src="http://js.api.here.com/v3/3.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+    <form class="form-group" method="GET" action="/maps/search">
+        <div class="active-cyan-3 active-cyan-4 mb-4">
+            <br>
+            <input class="form-control typeahead tt-query" type="text" placeholder="Search for events.." name="key">
+            <button type="submit" class="btn btn-outline-secondary">search</button>
+        </div>
+    </form>
+</div>
+
+<!--scrip for search-->
+<div class="column">
 <!--maps-->
-    <div id='mapContainer' class="z-depth-1-half map-container" style="width:100%;height:500px">
+    <div id='map' class="z-depth-1-half map-container" style="width:100%;height:500px">
         <!--
         <iframe width="100%" height="500px" src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
         style="border:0" allowfullscreen></iframe>
@@ -10,22 +24,29 @@
     </div>
 </div>
 
+<!--if error put mapScript content here-->
 <script>
-        // Initialize the platform object:
-        var platform = new H.service.Platform({
-            'app_id': '2JXuJFCztuQDBLwLDUXH',
-            'app_code': '5IMTHP24i88T6fZuyBaYrA'
-        });
+      //get data from node route
+    var test = {{{testData}}};
+    //maps options 
+    var mapOptions = {
+        center: test[0].geo,
+        zoom: 16
+    }
 
-        // Obtain the default map types from the platform object
-        var maptypes = platform.createDefaultLayers();
 
-        // Instantiate (and display) a map object:
-        var map = new H.Map(
-            document.getElementById('mapContainer'),
-            maptypes.normal.map,
-            {
-                zoom: 10,
-                center: { lng: 13.4, lat: 52.51 }
-        });
-  </script>
+    //crrating new map object
+    var map = new L.map('map',mapOptions);
+    //create map layer
+    var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+    //adding layer to map.
+    map.addLayer(layer);
+    
+    console.log(test[0].geo[0]);
+    console.log(test[0].name);
+    for (var i = 0; i < test.length; i++) {
+			marker = new L.marker([test[i].geo[0],test[i].geo[1]])
+				.bindPopup(test[i].name)
+				.addTo(map);
+		}
+</script>

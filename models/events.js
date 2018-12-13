@@ -20,7 +20,7 @@ let eventSchema = mongoose.Schema({
         require:true
     },
     geo:{
-        type:String,
+        type:Array,
         require:true
     },
     description:{
@@ -28,5 +28,6 @@ let eventSchema = mongoose.Schema({
         require: true
     }
 });
+
 
 var Event = module.exports = mongoose.model('Event',eventSchema);
