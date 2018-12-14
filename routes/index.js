@@ -4,7 +4,7 @@ var moongose = require('mongoose');
 var {sanitizeBody} = require('express-validator/filter');
 /* GET home page. */
 // using moongose to fetch event list from database
-moongose.connect('mongodb://user:password12345@ds127604.mlab.com:27604/usmevent', { useNewUrlParser: true });
+moongose.connect('mongodb://yourusername:yourpassword12345@yourmongodbhost:27604/usmevent', { useNewUrlParser: true });
 let db = moongose.connection;
 
 
