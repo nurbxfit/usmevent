@@ -7,6 +7,7 @@ var hbs = require('hbs');
 var expressValidator = require('express-validator');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var organiserRouter = require('./routes/organiser');
 var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');
@@ -52,7 +53,7 @@ app.use(flash());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/organiser',organiserRouter);
 
 
 

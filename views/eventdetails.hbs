@@ -1,0 +1,52 @@
+<!--navbar-->
+{{#if isLogin}}
+{{>navbarprofile}}
+{{else}}
+{{>navbar}}
+{{/if}}
+
+<!--Event List Card-->
+<div class="container-fluid">
+    <!--<h2 style="color:whitesmoke; text-align:center; margin-top:50px;">
+        USM Events
+    </h2>-->
+    <div class="row" style="text-align:center;">
+        <div style="margin-top:10px; width:100%">
+            
+            <div class="card" style="margin-top:10px; width:100%">
+                <div class="card-body">
+                    {{#each eventD}}
+                        <h3 class="card-title">{{name}}</h3>
+                        <p class="card-text">Description: {{description}} </p>
+                        <p class="card-text">Date : {{date}} </p>
+                        <p class="card-text">Organizer : {{club}} </p> <br></br>
+                    {{/each}}
+                    <div class="container-fluid" style="width:70%;">
+                        {{>maps}}
+                    </div>
+                    <br></br>
+                    <a href="#" class="btn btn-primary" style="width:auto; padding-right:40px; padding-left: 40px; border-radius:20pt">Book Ticket!</a><br></br>
+
+                    <div class="fb-comments" data-href="https://localhost:3000/eventdetails" data-numposts="5"></div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Javascript SDK for fb comments plugin-->
+<div id="fb-root"></div>
+
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
