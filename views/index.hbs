@@ -6,6 +6,19 @@
     {{>navbar}}
 {{/if}}
 
+<!-- HEAD consist of searchbar and maps-->
+
+<div class="container-fluid" style="margin-top:20px">
+<!--Searchbar-->
+<div class="column">
+    <form class="form-group" method="GET" action="/maps/search">
+        <div class="active-cyan-3 active-cyan-4 mb-4">
+            <br>
+            <input class="form-control typeahead tt-query" type="text" placeholder="Search for events.." name="key">
+            <button type="submit" class="btn btn-outline-secondary">search</button>
+        </div>
+    </form>
+</div>
 
 
 {{>maps}}
@@ -30,9 +43,12 @@
         <div class="col-sm-6" style="margin-top:10px">
             <div class="card" >
                 <div class="card-body">
-                    <h5 class="card-title">{{name}}</h5>
+                    <form action="/event/eventdetails" method="GET">
+                    <h5 class="card-title"><input type="hidden" name="name" value="{{name}}"/>{{name}}</h5>
                     <p class="card-text">{{description}}</p>
-                    <a href="#" class="btn btn-primary">Find out more</a>
+
+                        <button class="btn btn-primary" type="submit" >Find out more</button>
+                    </form>
                 </div>
             </div>
         </div>
