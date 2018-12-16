@@ -18,15 +18,16 @@
 <!--only login user can add new event-->
 {{#if isLogin}}
 <!--addevent-->
-    <div class="container" style="margin-top:10px">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Add New Event</h5><br>
-                <a href="/addevent" width="30%" height="auto"><img width="10%" height="10%" src="/images/addicon.png" alt="addEvent" ></a><br></br>
-                <a class="btn btn-primary" style="width:auto; padding-right:40px; padding-left: 40px; border-radius:20pt" href="/organiser/addevent">Add New Event</a>
+  <div class="row" style="text-align:center;">
+        <div class="col-sm-6" style="margin-top:10px; text-align:center">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Add New Event</h5>
+                    <a class="card-text" href="/organiser/addevent" width="30%" height="auto"><img width="30px" height="30px" max-width="5%" max-height="5%" src="/images/addicon.png" alt="addEvent"></a><br></br>
+                    <a class="btn btn-sec" href="/organiser/addevent">Add New Event</a>
+                </div>
             </div>
-        </div>
-    </div>
+        </div> <!--/addevent-->
 {{/if}}
 <!--event list-->
 
