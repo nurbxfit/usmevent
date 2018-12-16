@@ -7,3 +7,73 @@ body {
 a {
   color: #00B7FF;
 }
+
+
+/* button to add new event*/
+
+.btn-sec {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+    .btn-sec:focus,
+    .btn-sec.focus {
+        color: #fff;
+        background-color: #dc3545;
+        border-color: #6e1a22;
+    }
+
+    .btn-sec:hover {
+        color: #fff;
+        background-color: #6e1a22;
+        border-color: #6e1a22;
+    }
+
+    .btn-sec:active,
+    .btn-sec.active,
+    .open > .dropdown-toggle.btn-sec {
+        color: #fff;
+        background-color: #dc3545;
+        border-color: #6e1a22;
+    }
+
+        .btn-sec:active:hover,
+        .btn-sec.active:hover,
+        .open > .dropdown-toggle.btn-sec:hover,
+        .btn-sec:active:focus,
+        .btn-sec.active:focus,
+        .open > .dropdown-toggle.btn-sec:focus,
+        .btn-sec:active.focus,
+        .btn-sec.active.focus,
+        .open > .dropdown-toggle.btn-sec.focus {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #6e1a22;
+        }
+
+    .btn-sec:active,
+    .btn-sec.active,
+    .open > .dropdown-toggle.btn-sec {
+        background-image: none;
+    }
+
+    .btn-sec.disabled:hover,
+    .btn-sec[disabled]:hover,
+    fieldset[disabled] .btn-sec:hover,
+    .btn-sec.disabled:focus,
+    .btn-sec[disabled]:focus,
+    fieldset[disabled] .btn-sec:focus,
+    .btn-sec.disabled.focus,
+    .btn-sec[disabled].focus,
+    fieldset[disabled] .btn-sec.focus {
+        background-color: #dc3545;
+        border-color: #6e1a22;
+    }
+
+    .btn-sec .badge {
+        color: #dc3545;
+        background-color: #fff;
+    }
+
+/*end button*/
