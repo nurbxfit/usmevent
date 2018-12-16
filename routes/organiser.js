@@ -3,10 +3,19 @@ var router = express.Router();
 var Events = require('../models/events');
 //routers for organiser to add events
 router.get('/addevent',function(req,res){
-    res.render('addevent');
+    if(req.isAuthenticated())
+    {
+        res.render('addevent',{isLogin:true});
+    }
+    else{
+        res.render('login',{status:"Not Login"})
+    }
+    
 });
 
 router.post('/addevent',function(req,res){
+    if(req.isAuthenticated())
+    {
     var name = req.body.name;
     var date = req.body.date;
     var club = req.body.club;
@@ -28,7 +37,7 @@ router.post('/addevent',function(req,res){
     var errors = req.validationErrors();
     if(errors){
         console.log("Error Occurs");
-        res.render('addevent',{errors:errors});
+        res.render('addevent',{errors:errors,isLogin:true});
     }
     else{
         //find if event is already in database
@@ -37,7 +46,7 @@ router.post('/addevent',function(req,res){
             if(event){
                 console.log("Alread Existed");
                 //render back the addevent page with errors
-                res.render('addevent',{signstat: 'Event already existed'});
+                res.render('addevent',{signstat: 'Event already existed',isLogin:true});
             }
             else //else if we cannot found in database
             {
@@ -48,17 +57,24 @@ router.post('/addevent',function(req,res){
                     club:club,
                     location:location,
                     geo:geo,
-                    description:description
+                    description:description,
+                    participant:0,
                 });
 
                 Events.createEvent(newEvent,function(err,event){
                     if(err) throw err;
                     console.log(event);
+                    console.log(event.name);
+                    res.redirect("/event/eventdetails?name="+event.name);
                 });
-                res.render('eventdetails',{status:"Event is created", event:newEvent});
+                
             }
         });
         
+    }
+    }
+    else{
+        res.render('login',{status:"Not Login"})
     }
 });
 

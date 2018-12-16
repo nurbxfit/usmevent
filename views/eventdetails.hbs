@@ -25,7 +25,13 @@
                         {{>maps}}
                     </div>
                     <br></br>
-                    <a href="#" class="btn btn-primary" style="width:auto; padding-right:40px; padding-left: 40px; border-radius:20pt">Book Ticket!</a><br></br>
+                    {{#each eventD}}
+                        <form method="GET" action="/event/bookevent">
+                            <input type="hidden" name="name" value="{{name}}"/>
+                            <button type="submit" class="btn btn-primary" style="width:auto; padding-right:40px; padding-left: 40px; border-radius:20pt" >Book Ticket!</button>
+                        </form>
+                    {{/each}}
+                    <!--<a href="#" class="btn btn-primary" style="width:auto; padding-right:40px; padding-left: 40px; border-radius:20pt">Book Ticket!</a><br></br> --->
 
                     <div class="fb-comments" data-href="https://localhost:3000/eventdetails" data-numposts="5"></div>
                     

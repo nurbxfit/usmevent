@@ -28,16 +28,13 @@ var Events = require('../models/events');
 
 router.get('/', function(req, res, next) {
   
-  //validation
-
-
-  Events.find({}).limit(8).sort({date: -1 }).exec(function(err,event){
+  Events.find({}).limit(10).sort({date: -1 }).exec(function(err,event){
     //console.log("User Session:"+req.user.username);
     if(err) throw err;
     console.log("Is Auth:"+req.isAuthenticated());
     if(req.isAuthenticated()){
       console.log("Authenticated");
-      res.render('index',{title: 'USM Event', titleArray:event , isLogin:true});
+      res.render('index',{title: 'USM Event', titleArray:event , isLogin:true, testData:JSON.stringify(event)});
     }
     else{
       res.render('index',{title: 'USM Event', titleArray:event, testData:JSON.stringify(event)});
@@ -48,25 +45,77 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/about', function(req,res){
-  res.render('about');
+  console.log("Is Auth:"+req.isAuthenticated());
+  if(req.isAuthenticated()){
+    console.log("Authenticated");
+    res.render('about',{isLogin:true});
+  }
+  else{
+    res.render('about');
+  }
+  
 });
 
 router.get('/events', function(req,res){
   Events.find({},function(err,event){
-    res.render('events',{title: 'Event', titleArray:event});
+    if(req.isAuthenticated()){
+      res.render('events',{title: 'Event', titleArray:event,isLogin:true});
+    }
+    else{
+      res.render('events',{title: 'Event', titleArray:event});
+    }
   });
 });
 
 
 router.get('/event/eventdetails',function(req,res){
   var eventname = req.query.name;
-  console.log("Event Name:"+ eventname);
-  Events.find({name:eventname},function(err,eventresult){
-    if(err) throw err;
-    console.log(eventresult);
-    res.render('eventdetails',{eventD:eventresult, testData:JSON.stringify(eventresult)});
-  });
+  if(req.isAuthenticated())
+  {
+    console.log("Event Name:"+ eventname);
+    Events.find({name:eventname},function(err,eventresult){
+      if(err) throw err;
+      console.log(eventresult);
+      res.render('eventdetails',{eventD:eventresult, testData:JSON.stringify(eventresult),isLogin:true});
+    });
+  }
+  else{
+    res.render('login',{status:"Not Login"});
+  }
+  
+  
 });
+
+router.get('/event/bookevent',function(req,res){
+  var eventname = req.query.name;
+  
+  console.log("Book For:"+eventname);
+  if(req.isAuthenticated())
+  {
+    var fullname = req.user.fname + " " + req.user.lname;
+    Events.findOne({name:eventname},function(err,eventresult){
+      if(err) throw err;
+      console.log(eventresult);
+      res.render('book',{titleArray:eventresult,isLogin:true,username:fullname});
+    });
+  }else{
+    res.render('login',{status:"Not Login"});
+  }
+});
+
+
+router.post('/event/bookevent',function(req,res){
+  if(req.isAuthenticated())
+  {
+
+  }
+  else
+  {
+    res.render('login',{status:"Not Login"});
+  }
+});
+
+
 
 router.get('/maps/search',function(req,res){
   var search = req.query.key;
@@ -76,4 +125,6 @@ router.get('/maps/search',function(req,res){
     res.render('index',{title: 'USM Event',titleArray:result,testData:JSON.stringify(result)});
   });
 });
+
+
 module.exports = router;

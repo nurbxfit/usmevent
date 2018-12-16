@@ -1,6 +1,9 @@
 <!-- Page for add new event (Organizer only-need to verify user as organizer)-->
-
+{{#if isLogin}}
+{{>navbarprofile}}
+{{else}}
 {{>navbar}}
+{{/if}}
 
 <div class="container">
     <div class="row" style="text-align:center">
@@ -8,20 +11,20 @@
 
             <br></br><h3 style="text-align:center">Add New Event</h3>
             <!--input validation-->
-              {{#if errors}}
+            {{#if errors}}
             {{#each errors}}
-             <div class="alert alert-danger">
-                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                {{msg}}
-                </div>
-            {{/each}}
-        {{/if}}
-        {{#if signstat}}
             <div class="alert alert-danger">
-                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                {{msg}}
+            </div>
+            {{/each}}
+            {{/if}}
+            {{#if signstat}}
+            <div class="alert alert-danger">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                 {{signstat}}
             </div>
-        {{/if}}
+            {{/if}}
 
 
             <form action="/organiser/addevent" method="POST" style="padding:30px">
@@ -46,19 +49,26 @@
                     <label for="location">Event Description:</label>
                     <input type="text" class="form-control" id="description" name="description" placeholder="Event Biasa-biasa je,">
                 </div>
+                <!-- Auto detect geolocation from map-->
+                <div class="form-group">
+                    <label for="geo">Geolocation:</label>
+                    <input type="text" class="form-control" id="geo" name="geo" placeholder="Latitude">
+                    <label for="geo1"></label>
+                    <input type="text" class="form-control" id="geo1" name="geo" placeholder="Longitude">
+                </div>
                 <!--div for map-->
-                <div id="mapEvent" class="form-group" style="display:none; width:100%;height:500px">  
+                <div id="mapEvent" class="form-group" style="display:none; width:100%;height:500px">
                     <input id="geo" type="text" class="form-control" name="geo">
                 </div>
                 <p id="current_position"></p>
                 <button onclick="showMe()" class="btn center-align" type="button" style="width:auto; padding-right:40px; padding-left: 40px; border-radius:20pt">
-                    Set Location Marker                   
+                    Set Location Marker
                 </button>
                 <br></br><br></br>
-               <!--<div class="form-group">
-                    <label for="geo">Latitude, Longitude:</label>
-                    <input type="text" class="form-control" id="geo" name="geo" placeholder="">
-                </div> -->
+                <!--<div class="form-group">
+         <label for="geo">Latitude, Longitude:</label>
+         <input type="text" class="form-control" id="geo" name="geo" placeholder="">
+     </div> -->
                 <div class="container-fluid" style="text-align:center">
                     <button type="submit" class="btn btn-primary" style="width:auto; padding-right:40px; padding-left: 40px; border-radius:20pt">Create Event</button>
                 </div>
@@ -72,7 +82,10 @@
 <!--<script src="js/eventmap.js"></script>-->
 <script>
 
-    var geoInput = document.getElementById('geo');
+    /*var geoInput = document.getElementById('geo');*/
+    var geoInputLat = document.getElementById('geo');
+    var geoInputLng = document.getElementById('geo1');
+
     var current = document.getElementById('current_position');
     function showMe(){
         var x = document.getElementById('mapEvent');
@@ -80,7 +93,7 @@
         x.style.display = "block";
         x.innerHTML = "Testing";
         initMap();
-        
+
     }
 
     function initMap(){
@@ -90,23 +103,31 @@
         myMap.addLayer(layer);
         myMap.setView([5.35416525,100.30093225],16);
         var marker;
-        myMap.on('click',function(e){          
+        myMap.on('click',function(e){
             if(marker)
             {
                 myMap.removeLayer(marker);
             }
             var lat = e.latlng.lat;
             var lng = e.latlng.lng;
-            var coordinate= "[" + lat.toString() + "," + lng.toString() + "]";
+            //var coordinate = "[" + lat.toString() + "," + lng.toString() + "]";
+            var coordinateLat = lat.toString();
+            var coordinateLng = lng.toString();
             //console.log("coordinate:"+coordinate);
             marker = new L.Marker(e.latlng,{draggable:'true'});
             marker.bindPopup("<b>Coordinate:</b> </br>" + lat.toString()+ "</br>" + lng.toString()).openPopup();
             marker.addTo(myMap);
-            geoInput.value = coordinate;
-            console.log("geoValue:"+geoInput.value);
-            current.innerText = "coordinate: " + geoInput.value;
+            //geoInput.value = coordinate;
+            //console.log("geoValue:"+geoInput.value);
+            //current.innerText = "coordinate: " + geoInput.value;
+            geoInputLat.value = coordinateLat;
+            geoInputLng.value = coordinateLng;
+            console.log("geoValue:" + geoInputLat.value + "," + geoInputLng.value);
+            current.innerText = "coordinate: " + "[" + geoInputLat.value + "," + geoInputLng.value + "]";
+
 
         });
-        
+
     }
 </script>
+

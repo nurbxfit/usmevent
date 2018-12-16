@@ -26,6 +26,10 @@ let eventSchema = mongoose.Schema({
     description:{
         type:String,
         require: true
+    },
+    participant:{
+        type: Number,
+        require: true,
     }
 });
 
