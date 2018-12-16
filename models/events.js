@@ -30,6 +30,9 @@ let eventSchema = mongoose.Schema({
     participant:{
         type: Number,
         require: true,
+    },
+    participantList:{
+        type:Array,
     }
 });
 

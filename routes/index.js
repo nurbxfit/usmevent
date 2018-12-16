@@ -93,10 +93,11 @@ router.get('/event/bookevent',function(req,res){
   if(req.isAuthenticated())
   {
     var fullname = req.user.fname + " " + req.user.lname;
+    var email = req.user.email;
     Events.findOne({name:eventname},function(err,eventresult){
       if(err) throw err;
       console.log(eventresult);
-      res.render('book',{titleArray:eventresult,isLogin:true,username:fullname});
+      res.render('book',{titleArray:eventresult,isLogin:true,username:fullname, email:email});
     });
   }else{
     res.render('login',{status:"Not Login"});
@@ -107,6 +108,40 @@ router.get('/event/bookevent',function(req,res){
 router.post('/event/bookevent',function(req,res){
   if(req.isAuthenticated())
   {
+    var eventname = req.body.eventname;
+    var name = req.body.name;
+    var matricno = req.body.matricno;
+    var phoneno = req.body.phoneno;
+    var email = req.body.email;
+
+    // form validation
+    req.checkBody('name', 'Name of event is required').notEmpty();
+    req.checkBody('matricno', 'Date of event is required').notEmpty();
+    req.checkBody('phoneno', 'Organizer is required').notEmpty();
+    req.checkBody('email', 'Location of the event is required').notEmpty();
+
+    var errors = req.validationErrors();
+    if(errors){
+        console.log("Error Occurs");
+        res.render('book',{errors:errors,isLogin:true});
+    }
+    else{
+      Events.findOne({name:eventname},function(err,result){
+        if(err) throw err;
+        var participant = result.participant;
+        var participantList = result.participantList;
+        var participantInfo = {name:name,matricno:matricno,phoneno:phoneno,email:email};
+        result.participant = participant + 1;
+        participantList.push(participantInfo);
+        result.participantList = participantList;
+        console.log(result.participantList);
+        result.save(function(err){
+          if(err) throw err;
+          console.log("Saved");
+          res.redirect("/");
+        });
+      });
+    }
 
   }
   else
