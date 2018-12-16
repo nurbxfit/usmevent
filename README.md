@@ -19,3 +19,7 @@ this website allows user to login and register.
 4. npm install express http-error
 5. npm start
 6. browse to localhost:3000 (if error occur, change port in bin/www to other port eg:8888)
+
+
+## Website Demo 
+https://usmevent.herokuapp.com/
