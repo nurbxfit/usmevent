@@ -14,6 +14,8 @@ router.post('/addevent',function(req,res){
     var geo = req.body.geo;
     var description = req.body.description;
 
+    console.log("Inside Post Geo:"+ geo);
+
     // form validation
     req.checkBody('name', 'Name of event is required').notEmpty();
     req.checkBody('date', 'Date of event is required').notEmpty();
