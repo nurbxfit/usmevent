@@ -63,8 +63,8 @@ router.post('/addevent',function(req,res){
 
                 Events.createEvent(newEvent,function(err,event){
                     if(err) throw err;
-                    console.log(event);
-                    console.log(event.name);
+                    //console.log(event);
+                    //console.log(event.name);
                     res.redirect("/event/eventdetails?name="+event.name);
                 });
                 
