@@ -28,7 +28,7 @@ var Events = require('../models/events');
 
 router.get('/', function(req, res, next) {
   
-  Events.find({}).limit(10).sort({date: -1 }).exec(function(err,event){
+  Events.find({}).sort({date: -1 }).exec(function(err,event){
     //console.log("User Session:"+req.user.username);
     if(err) throw err;
     console.log("Is Auth:"+req.isAuthenticated());
